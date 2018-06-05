@@ -28,10 +28,13 @@ $(document).ready(function(){
     }
 
    }
-
-
 });
 
+//Do not want to be graded on this one but I do want to know what I
+//am missing on this step. You do not have to tell me the rest of the
+//solution just helping me understand the switch of dashes and correct letter.
+//Alot of people I talked to did it with an array so I wanted to try and
+//do it without an array.
 
 
 
