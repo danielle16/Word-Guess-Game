@@ -1,43 +1,48 @@
-$(document).ready(function(){
+$(document).ready(function() {
+
+    var secretWord = ["united states", "mexico", "argentina", "venezuela", "ecuador"];
+    var lettersGuessed = [];
+    var lettersGuessedCorrectly = [];
+    var wins = 0;
+    var losses = 0;
+    var numOfGuessingRemaining = 10; 
+    var currentWord; 
+    temp = Math.floor(Math.random() * secretWord.length);
+    var currentWord = secretWord[temp];
     
-    var words = ["charles barkley", "maria sharapova", ];
-    var keyboard = document.getElementsByClassName("currentLetter");
-    var word = words[Math.floor(Math.random() * words.length)]; 
-    var userText = document.getElementById("display");
+    document.onkeyup = function(event){
+       var userGuess = event.key;
     
-    var userWord = "";
+       for(var i = 0; i < currentWord.length; i++) {
+           if(userGuess == currentWord[i]) {
+               lettersGuessedCorrectly.push(userGuess);
+           }
+       };
     
-    //Dashes 
-    for(var i = 0; i < word.length; i++) {
-        userWord += "-";  
+       if(lettersGuessedCorrectly.includes(userGuess)) {
+           numOfGuessingRemaining--;
+       };
+    
+       function fillInDashes () {
+       var dashes = "";
+       for (var i = 0; i < currentWord.length; i++) {
+           if(lettersGuessedCorrectly.includes(currentWord[i])) {
+              dashes += currentWord[i];
+           }
+           else {
+               dashes += "_";
+           }
+     
+       }
+       return dashes;
     }
-  
-    console.log(userWord);
-        for(var j = 0; j < word.length; j++) {
-         document.onkeyup = function(event) {
-             var input1 =  userText.textContent = event.key;
-
-         if(word.includes(input1)) {
-             var letter = input1;
-            userWord =  userWord.substring(0, letter) + word.charAt(letter);
-           console.log(letter);
-            
-     }
-        else 
-        console.log("no");
-    }
-
-   }
-});
-
-//Do not want to be graded on this one but I do want to know what I
-//am missing on this step. You do not have to tell me the rest of the
-//solution just helping me understand the switch of dashes and correct letter.
-//Alot of people I talked to did it with an array so I wanted to try and
-//do it without an array.
-
-
-
-
-
-
+    
+    $(".secretWord").text("Secret Word: " + fillInDashes());
+    $(".numOfGuesses").text("Number of Guesses Remaining: " + numOfGuessingRemaining);
+    $(".lettersGuessed").text("Letters Guessed: " + lettersGuessed);
+    $(".wins").text("Wins: " + wins);
+    $(".losses").text("Losses: " + losses);
+    
+    
+    };
+    });
